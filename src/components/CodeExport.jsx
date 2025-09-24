@@ -148,24 +148,24 @@ export default {
   return (
     <div className="space-y-6 py-4">
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Smart Code Export</h2>
-        <p className="text-gray-600">Convert Figma components to clean, reusable code</p>
+        <h2 className="text-2xl font-bold text-text mb-2 neon-text">Smart Code Export</h2>
+        <p className="text-text-secondary">Convert Figma components to clean, reusable code</p>
       </div>
 
       {/* Figma Integration Status */}
-      <div className="card border border-orange-200 bg-orange-50">
+      <div className="card border border-retro-cyan/30 bg-gradient-to-r from-retro-cyan/5 to-retro-purple/5">
         <div className="flex items-center gap-3">
-          <Figma className="w-6 h-6 text-orange-600" />
+          <Figma className="w-6 h-6 text-retro-cyan" />
           <div>
-            <h3 className="font-medium text-gray-800">Figma Connected</h3>
-            <p className="text-sm text-gray-600">Design System v2.1</p>
+            <h3 className="font-medium text-text">Figma Connected</h3>
+            <p className="text-sm text-text-secondary">Design System v2.1</p>
           </div>
         </div>
       </div>
 
       {/* Component Selection */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-text mb-2">
           Select Component
         </label>
         <div className="space-y-2">
@@ -173,18 +173,18 @@ export default {
             <button
               key={component.id}
               onClick={() => setSelectedComponent(component)}
-              className={`w-full text-left p-3 rounded-lg border transition-colors ${
+              className={`w-full text-left p-3 rounded-lg border transition-all duration-200 hover:scale-[1.02] ${
                 selectedComponent?.id === component.id
-                  ? 'border-primary bg-primary/5'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-primary bg-gradient-to-r from-primary/10 to-secondary/5 shadow-lg'
+                  : 'border-border hover:border-primary/50 bg-surface dark:bg-gray-700/50'
               }`}
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="font-medium text-gray-800">{component.name}</h4>
-                  <p className="text-sm text-gray-500">{component.type}</p>
+                  <h4 className="font-medium text-text">{component.name}</h4>
+                  <p className="text-sm text-text-secondary">{component.type}</p>
                 </div>
-                <Code2 className="w-4 h-4 text-gray-400" />
+                <Code2 className={`w-4 h-4 ${selectedComponent?.id === component.id ? 'text-primary' : 'text-text-secondary'}`} />
               </div>
             </button>
           ))}
@@ -193,7 +193,7 @@ export default {
 
       {/* Framework Selection */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-text mb-2">
           Target Framework
         </label>
         <div className="relative">
@@ -208,7 +208,7 @@ export default {
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-text-secondary pointer-events-none" />
         </div>
       </div>
 
@@ -216,10 +216,10 @@ export default {
       <button
         onClick={generateCode}
         disabled={!selectedComponent || isGenerating}
-        className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
+        className={`w-full py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
           !selectedComponent || isGenerating
-            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-            : 'btn-primary'
+            ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
+            : 'btn-primary hover:scale-105 retro-glow'
         }`}
       >
         {isGenerating ? (
@@ -236,34 +236,34 @@ export default {
       {generatedCode && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="font-medium text-gray-800">Generated Code</h3>
+            <h3 className="font-medium text-text">Generated Code</h3>
             <div className="flex gap-2">
               <button
                 onClick={copyToClipboard}
-                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-surface dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-border rounded-md transition-all duration-200 hover:scale-105"
               >
                 {copied ? (
                   <>
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    Copied!
+                    <CheckCircle className="w-4 h-4 text-retro-cyan" />
+                    <span className="text-retro-cyan">Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-4 h-4" />
-                    Copy
+                    <Copy className="w-4 h-4 text-text-secondary" />
+                    <span className="text-text">Copy</span>
                   </>
                 )}
               </button>
-              <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors">
-                <Download className="w-4 h-4" />
-                Download
+              <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-surface dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-border rounded-md transition-all duration-200 hover:scale-105">
+                <Download className="w-4 h-4 text-text-secondary" />
+                <span className="text-text">Download</span>
               </button>
             </div>
           </div>
           
-          <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+          <div className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto border border-retro-cyan/20 shadow-lg">
             <pre className="text-sm">
-              <code>{generatedCode}</code>
+              <code className="language-javascript">{generatedCode}</code>
             </pre>
           </div>
         </div>

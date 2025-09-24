@@ -3,10 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: hsl(210 80% 50%);
-  --color-accent: hsl(130 70% 45%);
-  --color-bg: hsl(210 30% 95%);
+  /* Light mode - Retro inspired */
+  --color-primary: hsl(330 80% 60%); /* Retro pink */
+  --color-secondary: hsl(280 70% 65%); /* Retro purple */
+  --color-accent: hsl(180 70% 50%); /* Retro cyan */
+  --color-bg: hsl(45 20% 95%); /* Warm off-white */
   --color-surface: hsl(0 0% 100%);
+  --color-text: hsl(220 20% 15%);
+  --color-text-secondary: hsl(220 15% 40%);
+  --color-border: hsl(220 15% 85%);
+  
+  /* Geometric elements */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -18,6 +25,18 @@
   --spacing-xl: 32px;
 }
 
+/* Dark mode - Retro inspired */
+:root.dark {
+  --color-primary: hsl(330 85% 70%); /* Brighter retro pink for dark mode */
+  --color-secondary: hsl(280 80% 75%); /* Brighter retro purple */
+  --color-accent: hsl(180 80% 60%); /* Brighter retro cyan */
+  --color-bg: hsl(220 25% 8%); /* Deep dark blue-black */
+  --color-surface: hsl(220 20% 12%); /* Dark surface */
+  --color-text: hsl(45 15% 90%); /* Warm white */
+  --color-text-secondary: hsl(45 10% 70%); /* Muted warm white */
+  --color-border: hsl(220 15% 25%); /* Dark border */
+}
+
 @layer base {
   body {
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -26,18 +45,38 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors duration-300;
+    @apply bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-md hover:shadow-lg transition-all duration-300 font-medium;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 10px 15px -3px hsla(330, 80%, 60%, 0.3), 0 4px 6px -2px hsla(330, 80%, 60%, 0.1);
   }
   
   .btn-secondary {
-    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors duration-300;
+    @apply bg-surface dark:bg-gray-700 text-text border border-border px-4 py-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-300;
   }
   
   .card {
-    @apply bg-surface rounded-lg shadow-md p-4;
+    @apply bg-surface dark:bg-gray-800 rounded-lg shadow-md border border-border p-4 transition-colors duration-300;
   }
   
   .input-field {
-    @apply w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary;
+    @apply w-full px-3 py-2 border border-border bg-surface dark:bg-gray-700 text-text rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 focus:border-primary transition-all duration-200;
+  }
+
+  /* Retro glow effects */
+  .retro-glow {
+    @apply shadow-lg transition-all duration-300;
+  }
+  
+  .retro-glow:hover {
+    @apply shadow-xl;
+    box-shadow: 0 20px 25px -5px hsla(330, 80%, 60%, 0.3), 0 10px 10px -5px hsla(330, 80%, 60%, 0.1);
+  }
+
+  /* Neon text effects */
+  .neon-text {
+    @apply bg-gradient-to-r from-retro-pink via-retro-purple to-retro-cyan bg-clip-text text-transparent;
   }
 }

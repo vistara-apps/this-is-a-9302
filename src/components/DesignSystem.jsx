@@ -68,14 +68,14 @@ const DesignSystem = () => {
   const renderColors = () => (
     <div className="grid grid-cols-2 gap-3">
       {designTokens.colors.map((color) => (
-        <div key={color.name} className="bg-white border border-gray-200 rounded-lg p-3">
+        <div key={color.name} className="card hover:scale-105 transition-transform duration-200">
           <div 
-            className="w-full h-12 rounded-md mb-3 border border-gray-200"
+            className="w-full h-12 rounded-md mb-3 border border-border shadow-inner"
             style={{ backgroundColor: color.value }}
           ></div>
-          <h4 className="font-medium text-gray-800 text-sm">{color.name}</h4>
-          <p className="text-xs text-gray-500 font-mono">{color.hex}</p>
-          <p className="text-xs text-gray-600 mt-1">{color.usage}</p>
+          <h4 className="font-medium text-text text-sm">{color.name}</h4>
+          <p className="text-xs text-text-secondary font-mono">{color.hex}</p>
+          <p className="text-xs text-text-secondary mt-1">{color.usage}</p>
         </div>
       ))}
     </div>
@@ -84,13 +84,13 @@ const DesignSystem = () => {
   const renderTypography = () => (
     <div className="space-y-4">
       {designTokens.typography.map((type) => (
-        <div key={type.name} className="bg-white border border-gray-200 rounded-lg p-4">
+        <div key={type.name} className="card hover:scale-[1.02] transition-transform duration-200">
           <div className="flex items-center justify-between mb-2">
-            <h4 className="font-medium text-gray-800">{type.name}</h4>
-            <span className="text-xs text-gray-500">{type.size}</span>
+            <h4 className="font-medium text-text">{type.name}</h4>
+            <span className="text-xs text-text-secondary">{type.size}</span>
           </div>
           <div 
-            className="mb-2 text-gray-800"
+            className="mb-2 text-text"
             style={{ 
               fontSize: Math.min(parseInt(type.size), 24) + 'px',
               fontWeight: type.weight,
@@ -184,26 +184,26 @@ const DesignSystem = () => {
     <div className="space-y-6 py-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Design System</h2>
-          <p className="text-gray-600">Centralized design tokens and components</p>
+          <h2 className="text-2xl font-bold text-text mb-2 neon-text">Design System</h2>
+          <p className="text-text-secondary">Centralized design tokens and components</p>
         </div>
-        <button className="p-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+        <button className="p-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg transition-all duration-200 retro-glow">
           <Plus className="w-5 h-5" />
         </button>
       </div>
 
       {/* Category Tabs */}
-      <div className="flex gap-1 bg-gray-100 p-1 rounded-lg">
+      <div className="flex gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg transition-colors duration-300">
         {categories.map((category) => {
           const Icon = category.icon
           return (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+              className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeCategory === category.id
-                  ? 'bg-white text-primary shadow-sm'
-                  : 'text-gray-600 hover:text-gray-800'
+                  ? 'bg-surface dark:bg-gray-700 text-primary shadow-sm border border-primary/20'
+                  : 'text-text-secondary hover:text-text hover:bg-surface/50 dark:hover:bg-gray-700/50'
               }`}
             >
               <Icon className="w-4 h-4" />

@@ -10,7 +10,7 @@ const Navigation = ({ activeTab, setActiveTab }) => {
   ]
 
   return (
-    <nav className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-200">
+    <nav className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-surface dark:bg-gray-800 border-t border-border transition-colors duration-300">
       <div className="flex">
         {tabs.map((tab) => {
           const Icon = tab.icon
@@ -20,13 +20,13 @@ const Navigation = ({ activeTab, setActiveTab }) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 py-3 px-2 flex flex-col items-center gap-1 transition-colors duration-200 ${
+              className={`flex-1 py-3 px-2 flex flex-col items-center gap-1 transition-all duration-200 ${
                 isActive 
-                  ? 'text-primary bg-primary/5' 
-                  : 'text-gray-600 hover:text-gray-800'
+                  ? 'text-primary bg-gradient-to-t from-primary/10 to-secondary/5 shadow-inner' 
+                  : 'text-text-secondary hover:text-text hover:bg-primary/5'
               }`}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className={`w-5 h-5 ${isActive ? 'drop-shadow-sm' : ''}`} />
               <span className="text-xs font-medium">{tab.label}</span>
             </button>
           )
