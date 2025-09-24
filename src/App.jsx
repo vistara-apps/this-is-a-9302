@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { ThemeProvider } from './contexts/ThemeContext'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import CodeExport from './components/CodeExport'
@@ -26,19 +27,21 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-bg">
-      <div className="max-w-md mx-auto bg-surface shadow-lg min-h-screen">
-        <Header user={user} setUser={setUser} />
-        
-        <main className="px-4 pb-20">
-          <div className="animate-fade-in">
-            {renderActiveTab()}
-          </div>
-        </main>
-        
-        <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+    <ThemeProvider>
+      <div className="min-h-screen bg-bg transition-colors duration-500">
+        <div className="max-w-md mx-auto bg-surface shadow-lg min-h-screen border-x border-border">
+          <Header user={user} setUser={setUser} />
+          
+          <main className="px-4 pb-20">
+            <div className="animate-fade-in">
+              {renderActiveTab()}
+            </div>
+          </main>
+          
+          <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   )
 }
 

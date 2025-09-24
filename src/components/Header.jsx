@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { User, Settings, Search } from 'lucide-react'
+import ThemeToggle from './ThemeToggle'
 
 const Header = ({ user, setUser }) => {
   const [showLogin, setShowLogin] = useState(false)
@@ -11,25 +12,28 @@ const Header = ({ user, setUser }) => {
   }
 
   return (
-    <header className="bg-gray-900 text-white p-4 relative">
+    <header className="bg-surface border-b border-border p-4 relative retro-grid">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold">DesignSyncAI</h1>
+        <h1 className="text-lg font-semibold text-text neon-glow">
+          DesignSync<span className="text-primary">AI</span>
+        </h1>
         
         <div className="flex items-center gap-3">
-          <Search className="w-5 h-5" />
+          <ThemeToggle />
+          <Search className="w-5 h-5 text-text-muted hover:text-primary transition-colors cursor-pointer" />
           
           {user ? (
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4" />
+              <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center neon-border">
+                <User className="w-4 h-4 text-white" />
               </div>
             </div>
           ) : (
             <button 
               onClick={() => setShowLogin(true)}
-              className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center"
+              className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center neon-border hover:scale-110 transition-transform"
             >
-              <User className="w-4 h-4" />
+              <User className="w-4 h-4 text-white" />
             </button>
           )}
         </div>
@@ -38,20 +42,20 @@ const Header = ({ user, setUser }) => {
       {/* Search Bar */}
       <div className="mt-3">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-text-muted" />
           <input
             type="text"
             placeholder="Search designs..."
-            className="w-full bg-gray-800 text-white pl-10 pr-4 py-2 rounded-lg border-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field pl-10 neon-border"
           />
         </div>
       </div>
 
       {/* Login Modal */}
       {showLogin && (
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white text-black p-6 rounded-lg m-4 w-full max-w-sm">
-            <h2 className="text-xl font-semibold mb-4">Sign In</h2>
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-surface text-text p-6 rounded-lg m-4 w-full max-w-sm border border-border neon-border">
+            <h2 className="text-xl font-semibold mb-4 text-primary neon-glow">Sign In</h2>
             <form onSubmit={handleLogin}>
               <input
                 type="email"

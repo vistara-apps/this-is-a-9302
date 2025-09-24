@@ -4,13 +4,21 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: 'hsl(210 80% 50%)',
-        accent: 'hsl(130 70% 45%)',
-        bg: 'hsl(210 30% 95%)',
-        surface: 'hsl(0 0% 100%)',
+        primary: 'var(--color-primary)',
+        accent: 'var(--color-accent)',
+        bg: 'var(--color-bg)',
+        surface: 'var(--color-surface)',
+        text: 'var(--color-text)',
+        'text-muted': 'var(--color-text-muted)',
+        border: 'var(--color-border)',
+        'neon-pink': 'var(--color-neon-pink)',
+        'neon-cyan': 'var(--color-neon-cyan)',
+        'neon-yellow': 'var(--color-neon-yellow)',
+        'neon-green': 'var(--color-neon-green)',
       },
       borderRadius: {
         'xs': '2px',
@@ -33,6 +41,9 @@ export default {
       animation: {
         'fade-in': 'fadeIn 300ms cubic-bezier(0.4, 0, 0.2, 1)',
         'slide-up': 'slideUp 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+        'neon-pulse': 'neonPulse 2s ease-in-out infinite alternate',
+        'retro-glow': 'retroGlow 1.5s ease-in-out infinite alternate',
+        'float': 'float 3s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -42,6 +53,24 @@ export default {
         slideUp: {
           '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        neonPulse: {
+          '0%': { 
+            filter: 'drop-shadow(0 0 5px currentColor) drop-shadow(0 0 10px currentColor)', 
+            transform: 'scale(1)' 
+          },
+          '100%': { 
+            filter: 'drop-shadow(0 0 10px currentColor) drop-shadow(0 0 20px currentColor)', 
+            transform: 'scale(1.02)' 
+          },
+        },
+        retroGlow: {
+          '0%': { boxShadow: '0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor' },
+          '100%': { boxShadow: '0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-5px)' },
         },
       },
     },
